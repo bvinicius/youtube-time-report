@@ -1,18 +1,16 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "module": "esnext",
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "types": [
-      "element-plus/global"
-    ]
-  },
-  "include": [
-    "vite.config.ts",
-    "src/**/*.json",
-    "manifest.json",
-    "package.json"
-  ]
+	"compilerOptions": {
+		"composite": true,
+		"module": "esnext",
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"types": ["element-plus/global"]
+	},
+	"include": [
+		"vite.config.ts",
+		"src/**/*.json",
+		"manifest.json",
+		"package.json"
+	]
 }
