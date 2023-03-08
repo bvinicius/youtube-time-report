@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+body {
+	font-family: SF Pro Text, SF Pro Icons, system, -apple-system, system-ui,
+		BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, Lucida Grande,
+		Kohinoor Devanagari, sans-serif;
+}

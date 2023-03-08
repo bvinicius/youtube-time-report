@@ -1,5 +1,5 @@
 <template>
-	<HomeView />
+	<HomeView class="min-w-[266px]" />
 </template>
 
 <script setup lang="ts">
