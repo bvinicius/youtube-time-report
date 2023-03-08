@@ -1,7 +1,8 @@
+<template>
+	<HomeView />
+</template>
+
 <script setup lang="ts">
 import '@/popup/index.css';
+import HomeView from './primary/views/HomeView.vue';
 </script>
-
-<template>
-	<div class="p-6">Hello!</div>
-</template>
