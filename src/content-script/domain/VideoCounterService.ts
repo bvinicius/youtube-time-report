@@ -1,4 +1,6 @@
+import { YoutubeVideo } from './YoutubeVideo';
+
 export interface VideoCounterService {
-	enableCounter(): void;
-	disableCounter(): void;
+	enableCounter(video: YoutubeVideo): void;
+	disableCounter(video: YoutubeVideo): void;
 }

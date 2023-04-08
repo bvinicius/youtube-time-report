@@ -8,6 +8,7 @@
 	},
 	"devDependencies": {
 		"@crxjs/vite-plugin": "^1.0.12",
+		"@types/chrome": "^0.0.228",
 		"@vitejs/plugin-vue": "^2.3.3",
 		"autoprefixer": "^10.4.13",
 		"postcss": "^8.4.21",

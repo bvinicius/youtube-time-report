@@ -1,15 +1,17 @@
 import { VideoObserver } from './domain/VideoObserver';
 import URLObserver from './secondary/URLObserver';
+import VideoCounterServiceImpl from './secondary/VideoCounterServiceImpl';
 import VideoObserverImpl from './secondary/VideoObserverImpl';
 import VideoServiceImpl from './secondary/VideoServiceImpl';
 
 let videoObserver: VideoObserver | null = null;
 
+const videoCounterService = new VideoCounterServiceImpl();
+
 init();
 new URLObserver(init).observe();
 
 function init() {
-	console.log('init');
 	videoObserver?.unobserve();
 
 	const videoService = new VideoServiceImpl();
@@ -27,9 +29,9 @@ function init() {
 }
 
 function onVideoPlay() {
-	console.log('Video is playing');
+	videoCounterService.enableCounter();
 }
 
 function onVideoPause() {
-	console.log('Video is paused');
+	videoCounterService.disableCounter();
 }
