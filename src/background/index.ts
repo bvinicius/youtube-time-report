@@ -2,6 +2,12 @@ import {
 	ContentVideoCounterMessage,
 	ContentYoutubeVideo,
 } from './secondary/ContentVideoCounterMessage';
+import StatisticsStorageServiceImpl from './secondary/StatisticsStorageServiceImpl';
+import VideoCounter from './secondary/VideoCounter';
+
+const statisticsService = new StatisticsStorageServiceImpl();
+
+const videoCounter = new VideoCounter(statisticsService);
 
 chrome.runtime.onMessage.addListener((message: ContentVideoCounterMessage) => {
 	switch (message.type) {
@@ -9,15 +15,15 @@ chrome.runtime.onMessage.addListener((message: ContentVideoCounterMessage) => {
 			onEnableCounter(message.payload);
 			break;
 		case 'disableCounter':
-			onDisableCounter(message.payload);
+			onDisableCounter();
 			break;
 	}
 });
 
 function onEnableCounter(payload: ContentYoutubeVideo) {
-	console.log('onEnableCounter', payload);
+	videoCounter.enableCounter(payload);
 }
 
-function onDisableCounter(payload: ContentYoutubeVideo) {
-	console.log('onDisableCounter', payload);
+function onDisableCounter() {
+	videoCounter.disableCounter();
 }
