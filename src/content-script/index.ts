@@ -22,16 +22,16 @@ function init() {
 	if (!videoId) return;
 
 	videoObserver = new VideoObserverImpl($video, {
-		onVideoPlay: () => onVideoPlay(videoId),
-		onVideoPause: () => onVideoPause(videoId),
+		onVideoPlay: () => enableTimeCounter(videoId),
+		onVideoPause: () => disableTimeCounter(videoId),
 	});
 	videoObserver.observe();
 }
 
-function onVideoPlay(videoId: string) {
+function enableTimeCounter(videoId: string) {
 	videoCounterService.enableCounter(videoId);
 }
 
-function onVideoPause(videoId: string) {
+function disableTimeCounter(videoId: string) {
 	videoCounterService.disableCounter(videoId);
 }
