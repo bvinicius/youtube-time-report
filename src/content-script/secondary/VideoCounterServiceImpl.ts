@@ -1,23 +1,22 @@
 import { VideoCounterService } from '../domain/VideoCounterService';
-import { YoutubeVideo } from '../domain/YoutubeVideo';
 
 export interface VideoCounterMessage {
 	type: 'enableCounter' | 'disableCounter';
-	payload: YoutubeVideo;
+	payload: { videoId: string };
 }
 
 export default class VideoCounterServiceImpl implements VideoCounterService {
-	enableCounter(video: YoutubeVideo): void {
+	enableCounter(videoId: string): void {
 		chrome.runtime.sendMessage<VideoCounterMessage>({
 			type: 'enableCounter',
-			payload: video,
+			payload: { videoId },
 		});
 	}
 
-	disableCounter(video: YoutubeVideo): void {
+	disableCounter(videoId: string): void {
 		chrome.runtime.sendMessage<VideoCounterMessage>({
 			type: 'disableCounter',
-			payload: video,
+			payload: { videoId },
 		});
 	}
 }

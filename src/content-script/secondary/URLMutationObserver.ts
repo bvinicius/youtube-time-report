@@ -1,4 +1,4 @@
-export default class URLObserver {
+export default class URLMutationObserver {
 	private oldHref: string;
 
 	constructor(private callback: () => void) {

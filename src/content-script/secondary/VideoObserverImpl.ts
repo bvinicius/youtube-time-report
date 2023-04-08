@@ -26,7 +26,6 @@ export default class VideoObserverImpl implements VideoObserver {
 	}
 
 	unobserve() {
-		console.log('unobserve');
 		this.video.removeEventListener('play', this.onVideoPlay);
 		this.video.removeEventListener('pause', this.onVideoPause);
 	}
