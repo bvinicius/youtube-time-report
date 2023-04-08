@@ -1,42 +1,27 @@
 {
-  "action": {
-    "default_popup": "src/popup/index.html"
-  },
-  "background": {
-    "service_worker": "src/background/index.ts",
-    "type": "module"
-  },
-  "content_scripts": [
-    {
-      "all_frames": true,
-      "js": [
-        "src/content-script/index.ts"
-      ],
-      "matches": [
-        "*://*/*"
-      ],
-      "run_at": "document_idle"
-    }
-  ],
-  "host_permissions": [
-    "*://*/*"
-  ],
-  "manifest_version": 3,
-  "name": "chrome-extension",
-  "options_page": "src/options/index.html",
-  "permissions": [
-    "storage",
-    "activeTab"
-  ],
-  "version": "1.0.0",
-  "web_accessible_resources": [
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "resources": [
-        "src/content-script/index.ts"
-      ]
-    }
-  ]
+	"name": "YouTube Time Report",
+	"version": "1.0.0",
+	"manifest_version": 3,
+	"action": {
+		"default_popup": "src/popup/index.html"
+	},
+	"background": {
+		"service_worker": "src/background/index.ts",
+		"type": "module"
+	},
+	"content_scripts": [
+		{
+			"js": ["src/content-script/index.ts"],
+			"matches": ["*://*.youtube.com/*"]
+		}
+	],
+	"host_permissions": ["*://*/*"],
+	"options_page": "src/options/index.html",
+	"permissions": ["storage", "activeTab"],
+	"web_accessible_resources": [
+		{
+			"matches": ["*://*/*"],
+			"resources": ["src/content-script/index.ts"]
+		}
+	]
 }
