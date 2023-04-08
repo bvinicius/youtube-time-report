@@ -1,14 +1,6 @@
-export type StatisticsState = Record<
-	string,
-	{
-		channel: string;
-		title: string;
-		tags: string[];
-		timeWatched: number;
-	}
->;
+export type StatisticsState = Record<string, number>;
 
 export interface StatisticsStorageService {
 	getState(): Promise<StatisticsState>;
-	incrementState(state: StatisticsState): void;
+	setState(state: StatisticsState): void;
 }

@@ -3,6 +3,8 @@ import {
 	StatisticsStorageService,
 } from '../domain/StatisticsStorageService';
 
+const STATISTICS_KEY = 'statistics';
+
 export default class StatisticsStorageServiceImpl
 	implements StatisticsStorageService
 {
@@ -13,28 +15,20 @@ export default class StatisticsStorageServiceImpl
 			return Promise.resolve(this.state);
 		}
 		return new Promise((resolve) => {
-			chrome.storage.local.get('statistics', (result) => {
-				console.log('storage result', result);
-
+			chrome.storage.local.get(STATISTICS_KEY, (result) => {
 				this.state = result.statistics || {};
 				resolve(this.state || {});
 			});
 		});
 	}
 
-	incrementState(state: StatisticsState) {
+	setState(state: StatisticsState) {
 		Object.keys(state).forEach((key) => {
 			if (!this.state) this.state = {};
-			this.state[key] = {
-				channel: state[key].channel,
-				title: state[key].title,
-				tags: state[key].tags,
-				timeWatched: key in state ? state[key].timeWatched + 1 : 1,
-			};
+			this.state[key] =
+				key in this.state ? this.state[key] + state[key] : state[key];
 		});
 
-		console.log('incrementState', this.state);
-
-		chrome.storage.local.set({ statistics: this.state || {} });
+		chrome.storage.local.set({ [STATISTICS_KEY]: this.state || {} });
 	}
 }

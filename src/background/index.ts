@@ -1,18 +1,14 @@
-import {
-	ContentVideoCounterMessage,
-	ContentYoutubeVideo,
-} from './secondary/ContentVideoCounterMessage';
+import { RemoteVideoCounterMessage } from './secondary/RemoteVideoCounterMessage';
 import StatisticsStorageServiceImpl from './secondary/StatisticsStorageServiceImpl';
-import VideoCounter from './secondary/VideoCounter';
+import VideoTimeCounter from './secondary/VideoTimeCounter';
 
 const statisticsService = new StatisticsStorageServiceImpl();
+const videoCounter = new VideoTimeCounter(statisticsService);
 
-const videoCounter = new VideoCounter(statisticsService);
-
-chrome.runtime.onMessage.addListener((message: ContentVideoCounterMessage) => {
+chrome.runtime.onMessage.addListener((message: RemoteVideoCounterMessage) => {
 	switch (message.type) {
 		case 'enableCounter':
-			onEnableCounter(message.payload);
+			onEnableCounter(message.payload.videoId);
 			break;
 		case 'disableCounter':
 			onDisableCounter();
@@ -20,8 +16,8 @@ chrome.runtime.onMessage.addListener((message: ContentVideoCounterMessage) => {
 	}
 });
 
-function onEnableCounter(payload: ContentYoutubeVideo) {
-	videoCounter.enableCounter(payload);
+function onEnableCounter(videoId: string) {
+	videoCounter.enableCounter(videoId);
 }
 
 function onDisableCounter() {
