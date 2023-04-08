@@ -15,9 +15,9 @@ chrome.runtime.onMessage.addListener((message: ContentVideoCounterMessage) => {
 });
 
 function onEnableCounter(payload: ContentYoutubeVideo) {
-	console.log('onEnableCounter');
+	console.log('onEnableCounter', payload);
 }
 
 function onDisableCounter(payload: ContentYoutubeVideo) {
-	console.log('onDisableCounter');
+	console.log('onDisableCounter', payload);
 }

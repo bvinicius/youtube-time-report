@@ -1,11 +1,11 @@
 import { VideoService } from '../domain/VideoService';
 
 export default class VideoServiceImpl implements VideoService {
-	getVideoChannel(): string {
-		throw new Error('Method not implemented.');
+	getVideoChannel(): string | null {
+		return 'TODO:channel';
 	}
-	getVideoId(): string {
-		throw new Error('Method not implemented.');
+	getVideoId(): string | null {
+		return 'TODO:id';
 	}
 	getVideoHTMLElement(): HTMLVideoElement | null {
 		if (!location.href.includes('watch?v=')) {
@@ -13,10 +13,10 @@ export default class VideoServiceImpl implements VideoService {
 		}
 		return document.querySelector('video');
 	}
-	getVideoTags(): string[] {
-		throw new Error('Method not implemented.');
+	getVideoTags(): string[] | null {
+		return ['TODO:tags'];
 	}
-	getVideoTitle(): string {
-		throw new Error('Method not implemented.');
+	getVideoTitle(): string | null {
+		return 'TODO:title';
 	}
 }

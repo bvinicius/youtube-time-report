@@ -1,6 +1,6 @@
 export interface YoutubeVideo {
-	channel: string;
-	id: string;
-	tags: string[];
-	title: string;
+	channel: string | null;
+	id: string | null;
+	tags: string[] | null;
+	title: string | null;
 }

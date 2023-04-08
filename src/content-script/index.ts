@@ -1,4 +1,5 @@
 import { VideoObserver } from './domain/VideoObserver';
+import { YoutubeVideo } from './domain/YoutubeVideo';
 import URLObserver from './secondary/URLObserver';
 import VideoCounterServiceImpl from './secondary/VideoCounterServiceImpl';
 import VideoObserverImpl from './secondary/VideoObserverImpl';
@@ -21,17 +22,26 @@ function init() {
 		return;
 	}
 
+	const youtubeVideo: YoutubeVideo = {
+		id: videoService.getVideoId(),
+		title: videoService.getVideoTitle(),
+		channel: videoService.getVideoChannel(),
+		tags: videoService.getVideoTags(),
+	};
+
+	console.log(youtubeVideo);
+
 	videoObserver = new VideoObserverImpl($video, {
-		onVideoPlay,
-		onVideoPause,
+		onVideoPlay: () => onVideoPlay(youtubeVideo),
+		onVideoPause: () => onVideoPause(youtubeVideo),
 	});
 	videoObserver.observe();
 }
 
-function onVideoPlay() {
-	videoCounterService.enableCounter();
+function onVideoPlay(video: YoutubeVideo) {
+	videoCounterService.enableCounter(video);
 }
 
-function onVideoPause() {
-	videoCounterService.disableCounter();
+function onVideoPause(video: YoutubeVideo) {
+	videoCounterService.disableCounter(video);
 }

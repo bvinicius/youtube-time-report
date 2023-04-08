@@ -1,7 +1,7 @@
 export interface VideoService {
-	getVideoChannel(): string;
-	getVideoId(): string;
+	getVideoChannel(): string | null;
+	getVideoId(): string | null;
 	getVideoHTMLElement(): HTMLVideoElement | null;
-	getVideoTags(): string[];
-	getVideoTitle(): string;
+	getVideoTags(): string[] | null;
+	getVideoTitle(): string | null;
 }
