@@ -1,4 +1,5 @@
 import { StatisticsStorageService } from '../domain/StatisticsStorageService';
+import { isoDate } from './utils/date-utils';
 
 const COMMIT_COUNTER_INTERVAL = 10;
 
@@ -56,7 +57,8 @@ export default class VideoTimeCounter {
 	}
 
 	private commitCounters() {
-		this.statisticsService.setState(this.counters);
+		const today = isoDate(new Date());
+		this.statisticsService.setState({ [today]: this.counters });
 		this.counters = {};
 		this.commitCounter = 0;
 	}

@@ -23,12 +23,18 @@ export default class StatisticsStorageServiceImpl
 	}
 
 	setState(state: StatisticsState) {
-		Object.keys(state).forEach((key) => {
-			if (!this.state) this.state = {};
-			this.state[key] =
-				key in this.state ? this.state[key] + state[key] : state[key];
-		});
+		Object.keys(state).forEach((date) => {
+			const videoTimes = state[date];
+			Object.keys(videoTimes).forEach((videoId) => {
+				const time = videoTimes[videoId];
+				if (!this.state) this.state = {};
+				if (!this.state[date]) this.state[date] = {};
 
-		chrome.storage.local.set({ [STATISTICS_KEY]: this.state || {} });
+				this.state[date][videoId] =
+					videoId in this.state[date]
+						? this.state[date][videoId] + time
+						: time;
+			});
+		});
 	}
 }
