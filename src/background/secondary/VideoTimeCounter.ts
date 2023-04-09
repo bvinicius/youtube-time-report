@@ -16,7 +16,6 @@ export default class VideoTimeCounter {
 
 	enableCounter(videoId?: string) {
 		if (this.isCounterRunning) {
-			console.log('counter already ENABLED. skipping...');
 			return;
 		}
 		if (videoId) {
@@ -39,7 +38,6 @@ export default class VideoTimeCounter {
 
 	disableCounter() {
 		if (!this.isCounterRunning) {
-			console.log('counter already DISABLED. skipping...');
 			return;
 		}
 
@@ -51,12 +49,16 @@ export default class VideoTimeCounter {
 	}
 
 	private incrementCounter(videoId: string) {
+		console.log('incrementCounter', videoId);
+
 		this.counters[videoId] = this.counters[videoId]
 			? this.counters[videoId] + 1
 			: 1;
 	}
 
 	private commitCounters() {
+		console.log('commitCounters', this.counters);
+
 		const today = isoDate(new Date());
 		this.statisticsService.setState({ [today]: this.counters });
 		this.counters = {};

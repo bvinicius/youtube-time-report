@@ -17,12 +17,15 @@ export default class StatisticsStorageServiceImpl
 		return new Promise((resolve) => {
 			chrome.storage.local.get(STATISTICS_KEY, (result) => {
 				this.state = result.statistics || {};
+				console.log('getState', this.state);
 				resolve(this.state || {});
 			});
 		});
 	}
 
 	setState(state: StatisticsState) {
+		console.log('setState', state);
+
 		Object.keys(state).forEach((date) => {
 			const videoTimes = state[date];
 			Object.keys(videoTimes).forEach((videoId) => {
@@ -36,5 +39,7 @@ export default class StatisticsStorageServiceImpl
 						: time;
 			});
 		});
+
+		chrome.storage.local.set({ statistics: this.state });
 	}
 }
