@@ -12,6 +12,7 @@ init();
 new URLMutationObserver(init).observe();
 
 function init() {
+	disableTimeCounter();
 	videoObserver?.unobserve();
 
 	const videoService = new VideoServiceImpl();
@@ -19,11 +20,12 @@ function init() {
 	if (!$video) return;
 
 	const videoId = videoService.getVideoId();
+
 	if (!videoId) return;
 
 	videoObserver = new VideoObserverImpl($video, {
 		onVideoPlay: () => enableTimeCounter(videoId),
-		onVideoPause: () => disableTimeCounter(videoId),
+		onVideoPause: () => disableTimeCounter(),
 	});
 	videoObserver.observe();
 }
@@ -32,6 +34,6 @@ function enableTimeCounter(videoId: string) {
 	videoCounterService.enableCounter(videoId);
 }
 
-function disableTimeCounter(videoId: string) {
-	videoCounterService.disableCounter(videoId);
+function disableTimeCounter() {
+	videoCounterService.disableCounter();
 }

@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener((message: RemoteVideoCounterMessage) => {
 	}
 });
 
-function onEnableCounter(videoId?: string) {
+function onEnableCounter(videoId: string) {
 	videoCounter.enableCounter(videoId);
 }
 

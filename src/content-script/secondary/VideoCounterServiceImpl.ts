@@ -13,10 +13,9 @@ export default class VideoCounterServiceImpl implements VideoCounterService {
 		});
 	}
 
-	disableCounter(videoId: string): void {
-		chrome.runtime.sendMessage<VideoCounterMessage>({
+	disableCounter(): void {
+		chrome.runtime.sendMessage<Pick<VideoCounterMessage, 'type'>>({
 			type: 'disableCounter',
-			payload: { videoId },
 		});
 	}
 }
