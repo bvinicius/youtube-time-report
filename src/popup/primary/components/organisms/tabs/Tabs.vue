@@ -1,7 +1,11 @@
 <template>
-	<div class="flex justify-center">
+	<div class="flex">
 		<div class="flex items-center" v-for="(tab, index) in tabs">
-			<div class="tab__header text-body cursor-pointer py-2 px-4">
+			<div
+				class="tab__header text-body cursor-pointer py-2 px-4"
+				:class="{ selected: tab.value === props.modelValue }"
+				@click="$emit('update:modelValue', tab.value)"
+			>
 				{{ tab.title }}
 			</div>
 			<TheDivider v-if="index !== tabs.length - 1" class="h-2/3 w-px" />
@@ -11,19 +15,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useSlots } from 'vue';
-import TheDivider from '../../atoms/TheDivider.vue';
-
-interface TabInfo {
-	title: string;
-}
+import { computed, provide, readonly, ref, useSlots } from 'vue';
+import { TabInfo } from '../../../../domain/tabs/TabInfo';
+import TheDivider from '@/popup/primary/components/atoms/TheDivider.vue';
 
 const slots = useSlots();
+
+const props = defineProps<{
+	modelValue: TabInfo['value'];
+}>();
+
+defineEmits<{
+	(e: 'update:modelValue', value: TabInfo['value']): void;
+}>();
+
+provide('currentTab', readonly(computed(() => props.modelValue)));
 
 const tabs = ref<TabInfo[]>(
 	slots.default
 		? slots.default().map((tab) => ({
 				title: tab.props?.title as string,
+				value: tab.props?.value as number,
 		  }))
 		: []
 );
@@ -31,8 +43,6 @@ const tabs = ref<TabInfo[]>(
 
 <style lang="scss">
 .tab__header {
-	position: relative;
-
 	&.selected {
 		font-weight: bold;
 	}

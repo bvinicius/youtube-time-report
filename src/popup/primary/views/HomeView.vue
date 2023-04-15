@@ -8,9 +8,16 @@
 			</div>
 		</PopupHeader>
 
-		<Tabs>
-			<Tab title="tab 1">Tab content 1</Tab>
-			<Tab title="tab 2">Tab content 2</Tab>
+		<Tabs v-model="tab" class="justify-center">
+			<Tab title="Daily" value="day">
+				<div class="text-title">days</div>
+			</Tab>
+			<Tab title="Weekly" value="week">
+				<div class="text-title">weeks</div>
+			</Tab>
+			<Tab title="Monthly" value="month">
+				<div class="text-title">month</div>
+			</Tab>
 		</Tabs>
 	</div>
 </template>
