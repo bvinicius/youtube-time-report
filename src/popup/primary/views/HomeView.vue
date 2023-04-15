@@ -13,19 +13,19 @@
 				<Tab title="Daily" value="day">
 					<TimeSpentArticle
 						description="Average time you spend watching YouTube videos every day"
-						:time="1800"
+						:time="3600 * 2 + 30 * 60"
 					/>
 				</Tab>
 				<Tab title="Weekly" value="week">
 					<TimeSpentArticle
 						description="Time you spend watching YoutTube videos in the last 7 days"
-						:time="1800"
+						:time="3600 * 7"
 					/>
 				</Tab>
 				<Tab title="Monthly" value="month">
 					<TimeSpentArticle
 						description="Time you spend watching YoutTube videos in the last 30 days"
-						:time="1800"
+						:time="3600 * 20 + 17 * 60"
 					/>
 				</Tab>
 			</Tabs>

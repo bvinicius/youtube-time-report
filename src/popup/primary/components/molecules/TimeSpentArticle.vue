@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { duration } from '../../../secondary/utils/date-utils';
 
 const props = defineProps<{
 	description: string;
@@ -14,6 +15,6 @@ const props = defineProps<{
 }>();
 
 const timeSpent = computed(() => {
-	return props.time + ' seconds';
+	return duration(props.time);
 });
 </script>
