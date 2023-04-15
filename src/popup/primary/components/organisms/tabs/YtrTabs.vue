@@ -3,7 +3,7 @@
 		<div class="flex justify-center select-none">
 			<div class="flex items-center" v-for="(tab, index) in tabs">
 				<div
-					class="tab__header text-body cursor-pointer py-2 px-6"
+					class="text-body cursor-pointer py-2 px-6"
 					:class="[
 						tab.value === props.modelValue
 							? 'selected font-bold'
@@ -13,7 +13,7 @@
 				>
 					{{ tab.title }}
 				</div>
-				<TheDivider
+				<YtrDivider
 					v-if="index !== tabs.length - 1"
 					class="h-2/3 w-px"
 				/>
@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { computed, provide, readonly, ref, useSlots } from 'vue';
 import { TabInfo } from '../../../../domain/tabs/TabInfo';
-import TheDivider from '@/popup/primary/components/atoms/TheDivider.vue';
+import YtrDivider from '@/popup/primary/components/atoms/YtrDivider.vue';
 
 const slots = useSlots();
 
@@ -49,11 +49,3 @@ const tabs = ref<TabInfo[]>(
 		: []
 );
 </script>
-
-<style lang="scss">
-.tab__header {
-	&.selected {
-		font-weight: bold;
-	}
-}
-</style>
