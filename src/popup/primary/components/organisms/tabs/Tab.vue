@@ -1,7 +1,5 @@
 <template>
-	<div v-if="currentTab === value">
-		<slot></slot>
-	</div>
+	<slot v-if="currentTab === value"></slot>
 </template>
 <script setup lang="ts">
 import { ComputedRef, inject, watch } from 'vue';

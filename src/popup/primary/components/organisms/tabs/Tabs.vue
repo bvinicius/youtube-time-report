@@ -3,8 +3,12 @@
 		<div class="flex justify-center select-none">
 			<div class="flex items-center" v-for="(tab, index) in tabs">
 				<div
-					class="tab__header text-body cursor-pointer py-2 px-4"
-					:class="{ selected: tab.value === props.modelValue }"
+					class="tab__header text-body cursor-pointer py-2 px-6"
+					:class="[
+						tab.value === props.modelValue
+							? 'selected font-bold'
+							: '',
+					]"
 					@click="$emit('update:modelValue', tab.value)"
 				>
 					{{ tab.title }}
