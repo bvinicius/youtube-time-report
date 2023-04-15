@@ -34,7 +34,7 @@
 			</YtrTabs>
 
 			<div class="flex justify-center">
-				<button style="background-color: red">See insights</button>
+				<YtrButton>See insights</YtrButton>
 			</div>
 		</div>
 	</div>
@@ -48,6 +48,7 @@ import { TimeReportServices } from '../../domain/time-report/TimeReportServices'
 import PopupHeader from '@/popup/primary/components/molecules/PopupHeader.vue';
 import YtrTabs from '@/popup/primary/components/organisms/tabs/YtrTabs.vue';
 import YtrTab from '@/popup/primary/components/organisms/tabs/YtrTab.vue';
+import YtrButton from '@/popup/primary/components/atoms/YTRButton.vue';
 import TimeSpentArticle from '@/popup/primary/components/molecules/TimeSpentArticle.vue';
 import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
 
