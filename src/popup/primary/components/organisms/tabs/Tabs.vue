@@ -1,31 +1,40 @@
 <template>
 	<div class="flex justify-center">
-		<div v-for="tab in tabs"></div>
+		<div class="flex items-center" v-for="(tab, index) in tabs">
+			<div class="tab__header text-body cursor-pointer py-2 px-4">
+				{{ tab.title }}
+			</div>
+			<TheDivider v-if="index !== tabs.length - 1" class="h-2/3 w-px" />
+		</div>
+		<slot></slot>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, useSlots, onBeforeMount } from 'vue';
+import { ref, useSlots } from 'vue';
+import TheDivider from '../../atoms/TheDivider.vue';
 
 interface TabInfo {
 	title: string;
-	content: string;
 }
 
 const slots = useSlots();
 
-const selectedIndex = ref(0);
-const tabs = ref<TabInfo>();
-
-onBeforeMount(() => {
-	const defaultSlot = slots.default ? slots.default() : undefined;
-
-	console.log(defaultSlot);
-
-	defaultSlot?.forEach((slot, index) => {
-		if (slot.props?.selected) {
-			selectedIndex.value = index;
-		}
-	});
-});
+const tabs = ref<TabInfo[]>(
+	slots.default
+		? slots.default().map((tab) => ({
+				title: tab.props?.title as string,
+		  }))
+		: []
+);
 </script>
+
+<style lang="scss">
+.tab__header {
+	position: relative;
+
+	&.selected {
+		font-weight: bold;
+	}
+}
+</style>

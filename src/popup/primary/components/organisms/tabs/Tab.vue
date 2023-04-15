@@ -8,7 +8,6 @@ import { ref } from 'vue';
 
 defineProps<{
 	title: string;
-	value: string | number;
 }>();
 
 const isActive = ref(false);

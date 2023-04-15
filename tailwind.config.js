@@ -8,8 +8,9 @@ module.exports = {
 		colors: {
 			ytred: '#FF0000',
 			ytdark: '#0F0F0F',
-			'font-title': '#F1F1F1',
-			'font-body': '#AAAAAA',
+			ytgray3f: '#3F3F3F',
+			title: '#F1F1F1',
+			body: '#AAAAAA',
 		},
 	},
 	variants: {},
