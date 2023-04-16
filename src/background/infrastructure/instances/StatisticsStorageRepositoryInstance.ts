@@ -1,12 +1,12 @@
 import {
 	StatisticsState,
-	StatisticsStorageService,
-} from '../domain/StatisticsStorageService';
+	StatisticStorageRepository,
+} from '../repositories/StatisticStorageRepository';
 
 const STATISTICS_KEY = 'statistics';
 
-export default class StatisticsStorageServiceImpl
-	implements StatisticsStorageService
+export default class StatisticStorageReposisotyInstance
+	implements StatisticStorageRepository
 {
 	private state?: StatisticsState;
 

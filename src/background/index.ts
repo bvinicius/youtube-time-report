@@ -1,11 +1,11 @@
-import { RemoteVideoCounterMessage } from './secondary/RemoteVideoCounterMessage';
-import StatisticsStorageServiceImpl from './secondary/StatisticsStorageServiceImpl';
-import VideoTimeCounter from './secondary/VideoTimeCounter';
+import { VideoCounterMessageDto } from './infrastructure/dto/VideoCounterMessageDto';
+import StatisticStorageReposisotyInstance from './infrastructure/instances/StatisticsStorageRepositoryInstance';
+import VideoTimeCounter from './domain/VideoTimeCounter';
 
-const statisticsService = new StatisticsStorageServiceImpl();
+const statisticsService = new StatisticStorageReposisotyInstance();
 const videoCounter = new VideoTimeCounter(statisticsService);
 
-chrome.runtime.onMessage.addListener((message: RemoteVideoCounterMessage) => {
+chrome.runtime.onMessage.addListener((message: VideoCounterMessageDto) => {
 	switch (message.type) {
 		case 'enableCounter':
 			onEnableCounter(message.payload.videoId);

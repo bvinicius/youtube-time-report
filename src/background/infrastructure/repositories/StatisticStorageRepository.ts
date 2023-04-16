@@ -1,6 +1,6 @@
 export type StatisticsState = Record<string, Record<string, number>>;
 
-export interface StatisticsStorageService {
+export interface StatisticStorageRepository {
 	getState(): Promise<StatisticsState>;
 	setState(state: StatisticsState): void;
 }

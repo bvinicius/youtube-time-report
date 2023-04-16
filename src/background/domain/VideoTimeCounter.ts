@@ -1,10 +1,10 @@
-import { StatisticsStorageService } from '../domain/StatisticsStorageService';
-import { isoDate } from './utils/date-utils';
+import { StatisticStorageRepository } from '../infrastructure/repositories/StatisticStorageRepository';
+import { isoDate } from '../infrastructure/utils/date-utils';
 
 const COMMIT_COUNTER_INTERVAL = 10;
 
 export default class VideoTimeCounter {
-	constructor(private statisticsService: StatisticsStorageService) {}
+	constructor(private statisticsService: StatisticStorageRepository) {}
 	private counters: Record<string, number> = {};
 	private interval?: NodeJS.Timer;
 	private commitCounter = 0;
