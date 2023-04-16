@@ -13,7 +13,7 @@ export default class StatisticStorageReposisotyInstance
 {
 	private state?: StatisticsState;
 
-	private getStoredData(): Promise<StatisticsState> {
+	private getState(): Promise<StatisticsState> {
 		if (this.state) {
 			return Promise.resolve(this.state);
 		}
@@ -25,18 +25,18 @@ export default class StatisticStorageReposisotyInstance
 		});
 	}
 
-	async getState(
+	async getTimeWatched(
 		options: WatchingDataMessageDto['payload'] = defaultOptions
-	): Promise<StatisticsState> {
-		const data = await this.getStoredData();
+	): Promise<number> {
+		const data = await this.getState();
 		const startDay = subtractDays(new Date(), options.days);
 
-		const result = {};
+		let result = 0;
 
 		Object.keys(data)
 			.filter((date) => new Date(date) >= startDay)
 			.forEach((key) => {
-				Object.assign(result, { [key]: data[key] });
+				result += Object.values(data[key]).reduce((a, b) => a + b, 0);
 			});
 
 		console.log('STATE GOT: ', result);

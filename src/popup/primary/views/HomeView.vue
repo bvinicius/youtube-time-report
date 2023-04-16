@@ -49,7 +49,6 @@ import PopupHeader from '@/popup/primary/components/molecules/PopupHeader.vue';
 import YtrTabs from '@/popup/primary/components/organisms/tabs/YtrTabs.vue';
 import YtrTab from '@/popup/primary/components/organisms/tabs/YtrTab.vue';
 import YtrButton from '@/popup/primary/components/atoms/YTRButton.vue';
-import YtrIcon from '@/popup/primary/components/atoms/YtrIcon.vue';
 import TimeSpentArticle from '@/popup/primary/components/molecules/TimeSpentArticle.vue';
 import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
 
@@ -58,7 +57,9 @@ const timeReport = ref<PeriodicalTimeReport>();
 
 const timeReportServices = injectSafe<TimeReportServices>(TIME_REPORT_SERVICES);
 
-timeReportServices.getTimeReport().then((result) => {
+timeReportServices.getTimeReport([1, 7, 30]).then((result) => {
+	console.log('RESULT??????', result);
+
 	timeReport.value = result;
 });
 </script>

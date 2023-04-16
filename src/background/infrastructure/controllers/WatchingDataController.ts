@@ -23,6 +23,6 @@ export class WatchingDataController {
 	}
 
 	private getWatchingData(days: number) {
-		return this.statisticRepository.getState({ days });
+		return this.statisticRepository.getTimeWatched({ days });
 	}
 }

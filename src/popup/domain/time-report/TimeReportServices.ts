@@ -1,5 +1,5 @@
 import { PeriodicalTimeReport } from './TimeReportInfo';
 
 export interface TimeReportServices {
-	getTimeReport(): Promise<PeriodicalTimeReport>;
+	getTimeReport(days: number[]): Promise<PeriodicalTimeReport>;
 }

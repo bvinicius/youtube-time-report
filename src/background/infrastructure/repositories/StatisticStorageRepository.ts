@@ -3,8 +3,8 @@ import { WatchingDataMessageDto } from '../dto/WatchingDataMessageDto';
 export type StatisticsState = Record<string, Record<string, number>>;
 
 export interface StatisticStorageRepository {
-	getState(
+	getTimeWatched(
 		options?: WatchingDataMessageDto['payload']
-	): Promise<StatisticsState>;
+	): Promise<number>;
 	setState(state: StatisticsState): void;
 }
