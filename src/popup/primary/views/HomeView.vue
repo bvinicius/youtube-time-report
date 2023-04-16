@@ -34,7 +34,7 @@
 			</YtrTabs>
 
 			<div class="flex justify-center">
-				<YtrButton>See insights</YtrButton>
+				<YtrButton prependIcon="insights">See insights</YtrButton>
 			</div>
 		</div>
 	</div>
