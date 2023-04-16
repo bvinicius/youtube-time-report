@@ -1,25 +1,14 @@
-import { VideoCounterMessageDto } from './infrastructure/dto/VideoCounterMessageDto';
+import { VideoEventsController } from './infrastructure/controllers/VideoEventsController';
 import StatisticStorageReposisotyInstance from './infrastructure/instances/StatisticsStorageRepositoryInstance';
 import VideoTimeCounter from './domain/VideoTimeCounter';
+import { WatchingDataController } from './infrastructure/controllers/WatchingDataController';
 
-const statisticsService = new StatisticStorageReposisotyInstance();
-const videoCounter = new VideoTimeCounter(statisticsService);
+const statisticStorageRepository = new StatisticStorageReposisotyInstance();
+const videoCounter = new VideoTimeCounter(statisticStorageRepository);
 
-chrome.runtime.onMessage.addListener((message: VideoCounterMessageDto) => {
-	switch (message.type) {
-		case 'enableCounter':
-			onEnableCounter(message.payload.videoId);
-			break;
-		case 'disableCounter':
-			onDisableCounter();
-			break;
-	}
+new VideoEventsController(chrome.runtime).listen({
+	onEnabled: videoCounter.enableCounter.bind(videoCounter),
+	onDisabled: videoCounter.disableCounter.bind(videoCounter),
 });
 
-function onEnableCounter(videoId: string) {
-	videoCounter.enableCounter(videoId);
-}
-
-function onDisableCounter() {
-	videoCounter.disableCounter();
-}
+new WatchingDataController(chrome.runtime, statisticStorageRepository).listen();
