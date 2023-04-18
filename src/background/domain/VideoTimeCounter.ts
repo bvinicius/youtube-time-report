@@ -1,10 +1,10 @@
-import { StatisticStorageRepository } from '../infrastructure/repositories/StatisticStorageRepository';
+import { StatisticStorageService } from '../infrastructure/services/StatisticStorageService';
 import { isoDate } from '../infrastructure/utils/date-utils';
 
 const COMMIT_COUNTER_INTERVAL = 10;
 
 export default class VideoTimeCounter {
-	constructor(private statisticsService: StatisticStorageRepository) {}
+	constructor(private statisticsService: StatisticStorageService) {}
 	private counters: Record<string, number> = {};
 	private interval?: NodeJS.Timer;
 	private commitCounter = 0;
@@ -14,8 +14,6 @@ export default class VideoTimeCounter {
 	}
 
 	enableCounter(videoId: string) {
-		console.log('VideoTimeCounter.enableCounter', videoId);
-
 		if (this.isCounterRunning) {
 			return;
 		}
@@ -25,7 +23,7 @@ export default class VideoTimeCounter {
 			this.incrementCounter(videoId);
 			this.commitCounter++;
 			if (this.commitCounter === COMMIT_COUNTER_INTERVAL) {
-				this.commitCounters();
+				this.commit();
 			}
 		}, oneSecond);
 	}
@@ -37,18 +35,16 @@ export default class VideoTimeCounter {
 
 		clearInterval(this.interval);
 		this.interval = undefined;
-		this.commitCounters();
+		this.commit();
 	}
 
 	private incrementCounter(videoId: string) {
-		console.log('Going to increment', videoId);
-
 		this.counters[videoId] = this.counters[videoId]
 			? this.counters[videoId] + 1
 			: 1;
 	}
 
-	private commitCounters() {
+	private commit() {
 		const today = isoDate(new Date());
 		this.statisticsService.setState({ [today]: this.counters });
 		this.counters = {};

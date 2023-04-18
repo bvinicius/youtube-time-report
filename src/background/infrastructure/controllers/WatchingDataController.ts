@@ -1,10 +1,10 @@
 import { WatchingDataMessageDto } from '../dto/WatchingDataMessageDto';
-import { StatisticStorageRepository } from '../repositories/StatisticStorageRepository';
+import { StatisticStorageService } from '../services/StatisticStorageService';
 
 export class WatchingDataController {
 	constructor(
 		private receiver: typeof chrome.runtime,
-		private statisticRepository: StatisticStorageRepository
+		private statisticRepository: StatisticStorageService
 	) {}
 
 	listen() {
