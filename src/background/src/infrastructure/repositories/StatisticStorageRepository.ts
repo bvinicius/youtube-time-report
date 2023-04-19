@@ -1,5 +1,3 @@
-import { WatchingDataMessageDto } from '../dto/WatchingDataMessageDto';
-
 export type StatisticsState = Record<string, Record<string, number>>;
 
 export interface StatisticStorageRepository {
