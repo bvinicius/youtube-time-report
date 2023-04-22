@@ -3,8 +3,11 @@ import StatisticStorageReposisotyInstance from './infrastructure/instances/Stati
 import VideoTimeCounter from './domain/VideoTimeCounter';
 import { WatchingDataController } from './infrastructure/controllers/WatchingDataController';
 import { StatisticStorageServiceInstance } from './infrastructure/instances/StatisticStorageServiceInstance';
+import { StorageSystemInstance } from './infrastructure/instances/StorageSystemInstance';
 
-const statisticStorageRepository = new StatisticStorageReposisotyInstance();
+const statisticStorageRepository = new StatisticStorageReposisotyInstance(
+	new StorageSystemInstance()
+);
 const statisticStorageService = new StatisticStorageServiceInstance(
 	statisticStorageRepository
 );

@@ -2,12 +2,15 @@ import {
 	StatisticsState,
 	StatisticStorageRepository,
 } from '../repositories/StatisticStorageRepository';
+import { StorageSystem } from '../repositories/StorageSystem';
 
 const STATISTICS_KEY = 'statistics';
 
 export default class StatisticStorageReposisotyInstance
 	implements StatisticStorageRepository
 {
+	constructor(private storage: StorageSystem) {}
+
 	private state?: StatisticsState;
 
 	getState(): Promise<StatisticsState> {
@@ -15,8 +18,8 @@ export default class StatisticStorageReposisotyInstance
 			return Promise.resolve(this.state);
 		}
 		return new Promise((resolve) => {
-			chrome.storage.local.get(STATISTICS_KEY, (result) => {
-				this.state = result.statistics || {};
+			this.storage.get<StatisticsState>(STATISTICS_KEY).then((result) => {
+				this.state = result || {};
 				resolve(this.state || {});
 			});
 		});
@@ -37,6 +40,6 @@ export default class StatisticStorageReposisotyInstance
 			});
 		});
 
-		chrome.storage.local.set({ statistics: this.state });
+		this.storage.set(STATISTICS_KEY, this.state);
 	}
 }
