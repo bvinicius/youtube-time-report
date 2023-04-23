@@ -2,8 +2,6 @@
 	"name": "youtube-time-report",
 	"version": "1.0.0",
 	"dependencies": {
-		"@element-plus/icons-vue": "^2.0.6",
-		"element-plus": "^2.2.9",
 		"material-icons": "^1.13.4",
 		"vue": "^3.2.37"
 	},
