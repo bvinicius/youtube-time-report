@@ -14,21 +14,21 @@
 					<TimeSpentArticle
 						v-if="timeReport?.daily"
 						description="Average time you spend watching YouTube videos every day"
-						:time="timeReport.daily.timeSpent"
+						:time="timeReport.daily.timeSpent || 0"
 					/>
 				</YtrTab>
 				<YtrTab title="Weekly" value="week">
 					<TimeSpentArticle
 						v-if="timeReport?.weekly"
 						description="Time you spend watching YoutTube videos in the last 7 days"
-						:time="timeReport.weekly.timeSpent"
+						:time="timeReport.weekly.timeSpent || 0"
 					/>
 				</YtrTab>
 				<YtrTab title="Monthly" value="month">
 					<TimeSpentArticle
 						v-if="timeReport?.monthly"
 						description="Time you spend watching YoutTube videos in the last 30 days"
-						:time="timeReport.monthly.timeSpent"
+						:time="timeReport.monthly.timeSpent || 0"
 					/>
 				</YtrTab>
 			</YtrTabs>
@@ -57,11 +57,12 @@ const timeReport = ref<PeriodicalTimeReport>();
 
 const timeReportServices = injectSafe<TimeReportServices>(TIME_REPORT_SERVICES);
 
-timeReportServices.getTimeReport([1, 7, 30]).then((result) => {
-	console.log('RESULT??????', result);
-
-	timeReport.value = result;
-});
+timeReportServices
+	.getTimeReport({ averages: [7], absolutes: [7, 30] })
+	.then((result) => {
+		console.log('RESULT??????', result);
+		timeReport.value = result;
+	});
 </script>
 
 <style lang="scss"></style>

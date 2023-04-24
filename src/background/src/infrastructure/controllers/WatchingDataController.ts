@@ -1,10 +1,13 @@
-import { WatchingDataMessageDto } from '../dto/WatchingDataMessageDto';
+import {
+	WatchingDataAveragePeriodicity,
+	WatchingDataMessageDto,
+} from '../dto/WatchingDataMessageDto';
 import { StatisticStorageService } from '../services/StatisticStorageService';
 
 export class WatchingDataController {
 	constructor(
 		private receiver: typeof chrome.runtime,
-		private statisticRepository: StatisticStorageService
+		private statisticStorage: StatisticStorageService
 	) {}
 
 	listen() {
@@ -12,9 +15,16 @@ export class WatchingDataController {
 			(message: WatchingDataMessageDto, _, sendResponse) => {
 				switch (message.type) {
 					case 'watching-data':
-						this.getWatchingData(message.payload.days).then(
-							sendResponse
-						);
+						if (message.payload.average) {
+							this.getAverageWatchingData(
+								message.payload.average,
+								message.payload.days
+							).then(sendResponse);
+						} else {
+							this.getWatchingData(message.payload.days).then(
+								sendResponse
+							);
+						}
 						break;
 				}
 				return true;
@@ -23,6 +33,16 @@ export class WatchingDataController {
 	}
 
 	private getWatchingData(days: number) {
-		return this.statisticRepository.getTimeWatched({ days });
+		console.log('getWatchingData', days);
+
+		return this.statisticStorage.getTimeWatched({ days });
+	}
+
+	private getAverageWatchingData(
+		periodicity: WatchingDataAveragePeriodicity,
+		count: number
+	) {
+		console.log('get average', count);
+		return this.statisticStorage.getAverageWatchingData(periodicity, count);
 	}
 }

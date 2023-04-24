@@ -9,3 +9,8 @@ export const toPeriodicalTimeReport = (
 	weekly: { timeSpent: timeReportDto['7'] },
 	monthly: { timeSpent: timeReportDto['30'] },
 });
+
+export interface TimeReportQuery {
+	absolutes: number[];
+	averages: number[];
+}

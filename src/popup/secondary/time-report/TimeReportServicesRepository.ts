@@ -1,19 +1,31 @@
 import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
 import { TimeReportServices } from '../../domain/time-report/TimeReportServices';
-import { TimeReportDto, toPeriodicalTimeReport } from './TimeReportDto';
+import {
+	TimeReportDto,
+	TimeReportQuery,
+	toPeriodicalTimeReport,
+} from './TimeReportDtos';
 
 export class TimeReportServicesRepository implements TimeReportServices {
-	getTimeReport(days: number[]): Promise<PeriodicalTimeReport> {
+	getTimeReport(query: TimeReportQuery): Promise<PeriodicalTimeReport> {
+		const { absolutes, averages } = query;
+		const allDays = [...absolutes, ...averages];
+
 		return new Promise((resolve) => {
-			Promise.all(days.map((day) => this.getTimeWatched(day))).then(
-				(results) => {
-					const result: TimeReportDto = {};
-					results.forEach((res, index) => {
-						Object.assign(result, { [days[index]]: res });
-					});
-					resolve(toPeriodicalTimeReport(result));
-				}
+			const absPromises = absolutes.map((day) =>
+				this.getTimeWatched(day)
 			);
+			const avgPromises = averages.map((day) =>
+				this.getAverageTimeWatched(day)
+			);
+
+			Promise.all([...absPromises, ...avgPromises]).then((results) => {
+				const result: TimeReportDto = {};
+				results.forEach((res, index) => {
+					Object.assign(result, { [allDays[index]]: res });
+				});
+				resolve(toPeriodicalTimeReport(result));
+			});
 		});
 	}
 
@@ -22,6 +34,22 @@ export class TimeReportServicesRepository implements TimeReportServices {
 			chrome.runtime.sendMessage(
 				{ type: 'watching-data', payload: { days } },
 				(response) => {
+					console.log('resolved absolute time watched', response);
+					resolve(response);
+				}
+			);
+		});
+	}
+
+	private getAverageTimeWatched(days: number): Promise<number> {
+		return new Promise((resolve) => {
+			chrome.runtime.sendMessage(
+				{
+					type: 'watching-data',
+					payload: { days, average: 'daily' },
+				},
+				(response) => {
+					console.log('resolved average time watched', response);
 					resolve(response);
 				}
 			);

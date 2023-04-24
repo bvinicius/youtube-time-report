@@ -1,6 +1,8 @@
 <template>
 	<div class="flex flex-col text-body text-center py-6 px-2 gap-2">
-		<div class="text-title font-bold text-xl">{{ timeSpent }}</div>
+		<div class="text-title font-bold text-xl">
+			{{ timeSpent }}
+		</div>
 		<div>{{ description }}</div>
 	</div>
 </template>

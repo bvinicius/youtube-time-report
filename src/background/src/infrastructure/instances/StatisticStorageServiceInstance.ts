@@ -1,3 +1,4 @@
+import { WatchingDataAveragePeriodicity } from '../dto/WatchingDataMessageDto';
 import { StatisticStorageRepository } from '../repositories/StatisticStorageRepository';
 import { StatisticStorageService } from '../services/StatisticStorageService';
 import { subtractDays } from '../utils/date-utils';
@@ -24,6 +25,18 @@ export class StatisticStorageServiceInstance
 			});
 
 		return result;
+	}
+
+	async getAverageWatchingData(
+		periodicity: WatchingDataAveragePeriodicity,
+		count: number
+	) {
+		switch (periodicity) {
+			case 'daily': {
+				const time = await this.getTimeWatched({ days: count });
+				return time / count;
+			}
+		}
 	}
 
 	setState(state: Record<string, Record<string, number>>) {
