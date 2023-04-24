@@ -13,21 +13,21 @@
 				<YtrTab title="Daily" value="day">
 					<TimeSpentArticle
 						v-if="timeReport?.daily"
-						description="Average time you spend watching YouTube videos every day"
+						description="Average time you spent watching YouTube videos every day in the last 7 days"
 						:time="timeReport.daily.timeSpent || 0"
 					/>
 				</YtrTab>
 				<YtrTab title="Weekly" value="week">
 					<TimeSpentArticle
 						v-if="timeReport?.weekly"
-						description="Time you spend watching YoutTube videos in the last 7 days"
+						description="Time you spent watching YoutTube videos in the last 7 days"
 						:time="timeReport.weekly.timeSpent || 0"
 					/>
 				</YtrTab>
 				<YtrTab title="Monthly" value="month">
 					<TimeSpentArticle
 						v-if="timeReport?.monthly"
-						description="Time you spend watching YoutTube videos in the last 30 days"
+						description="Time you spent watching YoutTube videos in the last 30 days"
 						:time="timeReport.monthly.timeSpent || 0"
 					/>
 				</YtrTab>

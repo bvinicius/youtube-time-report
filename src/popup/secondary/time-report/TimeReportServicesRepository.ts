@@ -9,20 +9,23 @@ import {
 export class TimeReportServicesRepository implements TimeReportServices {
 	getTimeReport(query: TimeReportQuery): Promise<PeriodicalTimeReport> {
 		const { absolutes, averages } = query;
-		const allDays = [...absolutes, ...averages];
 
 		return new Promise((resolve) => {
 			const absPromises = absolutes.map((day) =>
-				this.getTimeWatched(day)
+				this.getTimeWatched(day).then((result) => ({
+					[day]: result,
+				}))
 			);
 			const avgPromises = averages.map((day) =>
-				this.getAverageTimeWatched(day)
+				this.getAverageTimeWatched(day).then((result) => ({
+					1: result,
+				}))
 			);
 
 			Promise.all([...absPromises, ...avgPromises]).then((results) => {
 				const result: TimeReportDto = {};
-				results.forEach((res, index) => {
-					Object.assign(result, { [allDays[index]]: res });
+				Object.values(results).forEach((obj) => {
+					Object.assign(result, obj);
 				});
 				resolve(toPeriodicalTimeReport(result));
 			});
