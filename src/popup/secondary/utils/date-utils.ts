@@ -3,7 +3,7 @@ export const duration = (seconds: number): string => {
 	const min = Math.floor((seconds - hours * 3600) / 60);
 
 	const hoursStr = hours > 0 ? `${hours}h ` : '';
-	const minStr = min > 0 ? `${min}min ` : '';
+	const minStr = `${min} min `;
 
 	return `${hoursStr}${minStr}`;
 };
