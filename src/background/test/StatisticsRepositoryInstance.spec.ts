@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, suite, test, vi } from 'vitest';
-import StatisticStorageReposisotyInstance from '../src/infrastructure/instances/StatisticsStorageRepositoryInstance';
+import StatisticsRepositoryInstance from '../src/infrastructure/instances/StatisticsRepositoryInstance';
 import { StorageSystem } from '../src/infrastructure/repositories/StorageSystem';
 
 vi.mock('chrome', () => ({
@@ -21,10 +21,10 @@ const StatisticStorageReposisotyInstanceTest = suite(
 			get: (key: string) => Promise.resolve(undefined),
 			set: (key: string, value: any) => Promise.resolve(),
 		};
-		let repo: StatisticStorageReposisotyInstance;
+		let repo: StatisticsRepositoryInstance;
 
 		beforeEach(() => {
-			repo = new StatisticStorageReposisotyInstance(storage);
+			repo = new StatisticsRepositoryInstance(storage);
 			vi.spyOn(storage, 'get');
 			vi.spyOn(storage, 'set');
 		});

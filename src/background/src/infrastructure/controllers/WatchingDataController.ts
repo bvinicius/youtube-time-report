@@ -2,12 +2,12 @@ import {
 	WatchingDataAveragePeriodicity,
 	WatchingDataMessageDto,
 } from '../dto/WatchingDataMessageDto';
-import { StatisticStorageService } from '../services/StatisticStorageService';
+import { StatisticsService } from '../services/StatisticsService';
 
 export class WatchingDataController {
 	constructor(
 		private receiver: typeof chrome.runtime,
-		private statisticStorage: StatisticStorageService
+		private statisticStorage: StatisticsService
 	) {}
 
 	listen() {

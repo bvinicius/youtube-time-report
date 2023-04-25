@@ -1,14 +1,14 @@
 import { VideoEventsController } from './infrastructure/controllers/VideoEventsController';
-import StatisticStorageReposisotyInstance from './infrastructure/instances/StatisticsStorageRepositoryInstance';
+import StatisticStorageReposisotyInstance from './infrastructure/instances/StatisticsRepositoryInstance';
 import VideoTimeCounter from './domain/VideoTimeCounter';
 import { WatchingDataController } from './infrastructure/controllers/WatchingDataController';
-import { StatisticStorageServiceInstance } from './infrastructure/instances/StatisticStorageServiceInstance';
+import { StatisticsServiceInstance } from './infrastructure/instances/StatisticsServiceInstance';
 import { StorageSystemInstance } from './infrastructure/instances/StorageSystemInstance';
 
 const statisticStorageRepository = new StatisticStorageReposisotyInstance(
 	new StorageSystemInstance()
 );
-const statisticStorageService = new StatisticStorageServiceInstance(
+const statisticStorageService = new StatisticsServiceInstance(
 	statisticStorageRepository
 );
 

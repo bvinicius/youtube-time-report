@@ -1,14 +1,12 @@
 import { WatchingDataAveragePeriodicity } from '../dto/WatchingDataMessageDto';
-import { StatisticStorageRepository } from '../repositories/StatisticStorageRepository';
-import { StatisticStorageService } from '../services/StatisticStorageService';
+import { StatisticsRepository } from '../repositories/StatisticsReppository';
+import { StatisticsService } from '../services/StatisticsService';
 import { subtractDays } from '../utils/date-utils';
 
 const defaultOptions = { days: 7 };
 
-export class StatisticStorageServiceInstance
-	implements StatisticStorageService
-{
-	constructor(private storageRepository: StatisticStorageRepository) {}
+export class StatisticsServiceInstance implements StatisticsService {
+	constructor(private storageRepository: StatisticsRepository) {}
 
 	async getTimeWatched(
 		options: { days: number } = defaultOptions

@@ -1,6 +1,6 @@
 import { WatchingDataAveragePeriodicity } from '../dto/WatchingDataMessageDto';
 
-export interface StatisticStorageService {
+export interface StatisticsService {
 	getTimeWatched(options: { days: number }): Promise<number>;
 	getAverageWatchingData(
 		periodicity: WatchingDataAveragePeriodicity,

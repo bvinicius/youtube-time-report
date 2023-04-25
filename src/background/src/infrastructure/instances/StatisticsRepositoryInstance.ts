@@ -1,13 +1,13 @@
 import {
 	StatisticsState,
-	StatisticStorageRepository,
-} from '../repositories/StatisticStorageRepository';
+	StatisticsRepository,
+} from '../repositories/StatisticsReppository';
 import { StorageSystem } from '../repositories/StorageSystem';
 
 const STATISTICS_KEY = 'statistics';
 
-export default class StatisticStorageReposisotyInstance
-	implements StatisticStorageRepository
+export default class StatisticsRepositoryInstance
+	implements StatisticsRepository
 {
 	constructor(private storage: StorageSystem) {}
 
