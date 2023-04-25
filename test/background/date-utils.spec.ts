@@ -1,5 +1,8 @@
 import { test, expect, describe } from 'vitest';
-import { isoDate, subtractDays } from '../src/infrastructure/utils/date-utils';
+import {
+	isoDate,
+	subtractDays,
+} from '../../src/background/infrastructure/utils/date-utils';
 
 describe('iso date', () => {
 	test('should get the ISO date from a normal Date object.', () => {

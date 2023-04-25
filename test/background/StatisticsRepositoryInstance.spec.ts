@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, expect, suite, test, vi } from 'vitest';
-import StatisticsRepositoryInstance from '../src/infrastructure/instances/StatisticsRepositoryInstance';
-import { StorageSystem } from '../src/infrastructure/repositories/StorageSystem';
+import StatisticsRepositoryInstance from '../../src/background/infrastructure/instances/StatisticsRepositoryInstance';
+import { StorageSystem } from '../../src/background/infrastructure/repositories/StorageSystem';
 
 vi.mock('chrome', () => ({
 	storage: {
