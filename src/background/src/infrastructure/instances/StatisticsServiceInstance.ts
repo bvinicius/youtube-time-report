@@ -12,7 +12,7 @@ export class StatisticsServiceInstance implements StatisticsService {
 		options: { days: number } = defaultOptions
 	): Promise<number> {
 		const data = await this.storageRepository.getState();
-		const startDay = subtractDays(new Date(), options.days);
+		const startDay = subtractDays(new Date(Date.now()), options.days);
 
 		let result = 0;
 
