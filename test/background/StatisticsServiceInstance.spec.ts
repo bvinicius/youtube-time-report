@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, expect, suite, test, vi } from 'vitest';
-import { StorageSystem } from '../src/infrastructure/repositories/StorageSystem';
-import { StatisticsServiceInstance } from '../src/infrastructure/instances/StatisticsServiceInstance';
-import { StatisticsService } from '../src/infrastructure/services/StatisticsService';
-import StatisticsRepositoryInstance from '../src/infrastructure/instances/StatisticsRepositoryInstance';
-import { StatisticsRepository } from '../src/infrastructure/repositories/StatisticsReppository';
+import { StorageSystem } from '../../src/background/infrastructure/repositories/StorageSystem';
+import { StatisticsServiceInstance } from '../../src/background/infrastructure/instances/StatisticsServiceInstance';
+import { StatisticsService } from '../../src/background/infrastructure/services/StatisticsService';
+import StatisticsRepositoryInstance from '../../src/background/infrastructure/instances/StatisticsRepositoryInstance';
+import { StatisticsRepository } from '../../src/background/infrastructure/repositories/StatisticsReppository';
 
 function setupService({ repository }: { repository: StatisticsRepository }) {
 	return new StatisticsServiceInstance(repository);

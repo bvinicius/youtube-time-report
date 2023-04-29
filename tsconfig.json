@@ -21,6 +21,11 @@
 		"src/**/*.tsx",
 		"src/**/*.vue",
 		"src/**/*.json",
+		"test/**/*.ts",
+		"test/**/*.d.ts",
+		"test/**/*.tsx",
+		"test/**/*.vue",
+		"test/**/*.json",
 		"manifest.json",
 		"package.json"
 	],

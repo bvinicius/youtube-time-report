@@ -4,7 +4,6 @@ import { defineConfig } from 'vite';
 import manifest from './manifest.json';
 import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
 	resolve: {
 		alias: {
