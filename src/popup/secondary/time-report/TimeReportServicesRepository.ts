@@ -1,5 +1,8 @@
 import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
 import { TimeReportServices } from '../../domain/time-report/TimeReportServices';
+import { injectSafe } from '../../primary/infrastructure/dependency-injection';
+import { LOGGER } from '../../primary/infrastructure/dependency-symbols';
+import { YTRLogger } from '../logger/YTRLogger';
 import {
 	TimeReportDto,
 	TimeReportQuery,
@@ -7,6 +10,8 @@ import {
 } from './TimeReportDtos';
 
 export class TimeReportServicesRepository implements TimeReportServices {
+	constructor(private logger: YTRLogger) {}
+
 	getTimeReport(query: TimeReportQuery): Promise<PeriodicalTimeReport> {
 		const { absolutes, averages } = query;
 
@@ -37,7 +42,7 @@ export class TimeReportServicesRepository implements TimeReportServices {
 			chrome.runtime.sendMessage(
 				{ type: 'watching-data', payload: { days } },
 				(response) => {
-					console.log('resolved absolute time watched', response);
+					this.logger.log('resolved absolute time watched', response);
 					resolve(response);
 				}
 			);
@@ -52,7 +57,7 @@ export class TimeReportServicesRepository implements TimeReportServices {
 					payload: { days, average: 'daily' },
 				},
 				(response) => {
-					console.log('resolved average time watched', response);
+					this.logger.log('resolved average time watched', response);
 					resolve(response);
 				}
 			);

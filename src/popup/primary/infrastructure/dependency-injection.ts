@@ -1,9 +1,17 @@
 import { App, inject } from 'vue';
 import { TimeReportServicesRepository } from '../../secondary/time-report/TimeReportServicesRepository';
-import { TIME_REPORT_SERVICES } from './dependency-symbols';
+import { LOGGER, TIME_REPORT_SERVICES } from './dependency-symbols';
+import { YTRLogger } from '../../secondary/logger/YTRLogger';
+import { TimeReportServices } from '../../domain/time-report/TimeReportServices';
+import { LoggerInstance } from '../../secondary/logger/LoggerInstance';
 
 const provideServices = (app: App): void => {
-	app.provide(TIME_REPORT_SERVICES, new TimeReportServicesRepository());
+	const loggerInstance = new LoggerInstance();
+	app.provide<TimeReportServices>(
+		TIME_REPORT_SERVICES,
+		new TimeReportServicesRepository(loggerInstance)
+	);
+	app.provide<YTRLogger>(LOGGER, loggerInstance);
 };
 
 export const injectSafe = <T>(dependency: symbol): T => {

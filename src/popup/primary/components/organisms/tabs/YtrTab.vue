@@ -2,7 +2,7 @@
 	<slot v-if="currentTab === value"></slot>
 </template>
 <script setup lang="ts">
-import { ComputedRef, inject, watch } from 'vue';
+import { ComputedRef, inject } from 'vue';
 import { TabInfo } from '../../../../domain/tabs/TabInfo';
 
 defineProps<{
@@ -11,11 +11,4 @@ defineProps<{
 }>();
 
 const currentTab = inject<ComputedRef<TabInfo['value']>>('currentTab');
-
-watch(
-	() => currentTab,
-	(newTab) => {
-		console.log('new tab', newTab);
-	}
-);
 </script>
