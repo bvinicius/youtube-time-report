@@ -2,7 +2,7 @@ import {
 	WatchingDataAveragePeriodicity,
 	WatchingDataMessageDto,
 } from '../dto/WatchingDataMessageDto';
-import { YTRLogger } from '../logger/YTRLogger';
+import { YTRLogger } from '../../../shared/logger/YTRLogger';
 import { StatisticsService } from '../services/StatisticsService';
 
 export class WatchingDataController {

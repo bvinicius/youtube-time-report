@@ -54,7 +54,7 @@ import YtrTab from '@/popup/primary/components/organisms/tabs/YtrTab.vue';
 import YtrButton from '@/popup/primary/components/atoms/YTRButton.vue';
 import TimeSpentArticle from '@/popup/primary/components/molecules/TimeSpentArticle.vue';
 import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
-import { YTRLogger } from '../../secondary/logger/YTRLogger';
+import { YTRLogger } from '../../../shared/logger/YTRLogger';
 
 const tab = ref('day');
 const timeReport = ref<PeriodicalTimeReport>();

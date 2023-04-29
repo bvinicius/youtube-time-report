@@ -2,7 +2,7 @@ import { PeriodicalTimeReport } from '../../domain/time-report/TimeReportInfo';
 import { TimeReportServices } from '../../domain/time-report/TimeReportServices';
 import { injectSafe } from '../../primary/infrastructure/dependency-injection';
 import { LOGGER } from '../../primary/infrastructure/dependency-symbols';
-import { YTRLogger } from '../logger/YTRLogger';
+import { YTRLogger } from '../../../shared/logger/YTRLogger';
 import {
 	TimeReportDto,
 	TimeReportQuery,

@@ -1,7 +1,7 @@
 import { App, inject } from 'vue';
 import { TimeReportServicesRepository } from '../../secondary/time-report/TimeReportServicesRepository';
 import { LOGGER, TIME_REPORT_SERVICES } from './dependency-symbols';
-import { YTRLogger } from '../../secondary/logger/YTRLogger';
+import { YTRLogger } from '../../../shared/logger/YTRLogger';
 import { TimeReportServices } from '../../domain/time-report/TimeReportServices';
 import { LoggerInstance } from '../../secondary/logger/LoggerInstance';
 
