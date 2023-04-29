@@ -1,4 +1,4 @@
 export interface VideoObserver {
-	observe(): void;
-	unobserve(): void;
+    observe(): void;
+    unobserve(): void;
 }

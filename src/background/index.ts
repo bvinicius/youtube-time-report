@@ -8,21 +8,21 @@ import { LoggerInstance } from './infrastructure/instances/LoggerInstance';
 
 const logger = new LoggerInstance();
 const statisticStorageRepository = new StatisticStorageReposisotyInstance(
-	new StorageSystemInstance()
+    new StorageSystemInstance()
 );
 const statisticStorageService = new StatisticsServiceInstance(
-	statisticStorageRepository
+    statisticStorageRepository
 );
 
 const videoCounter = new VideoTimeCounter(statisticStorageService);
 
 new VideoEventsController(chrome.runtime).listen({
-	onEnabled: videoCounter.enableCounter.bind(videoCounter),
-	onDisabled: videoCounter.disableCounter.bind(videoCounter),
+    onEnabled: videoCounter.enableCounter.bind(videoCounter),
+    onDisabled: videoCounter.disableCounter.bind(videoCounter)
 });
 
 new WatchingDataController(
-	chrome.runtime,
-	statisticStorageService,
-	logger
+    chrome.runtime,
+    statisticStorageService,
+    logger
 ).listen();

@@ -1,9 +1,9 @@
 export interface TimeReportInfo {
-	timeSpent: number;
+    timeSpent: number;
 }
 
 export interface PeriodicalTimeReport {
-	daily: TimeReportInfo;
-	weekly: TimeReportInfo;
-	monthly: TimeReportInfo;
+    daily: TimeReportInfo;
+    weekly: TimeReportInfo;
+    monthly: TimeReportInfo;
 }

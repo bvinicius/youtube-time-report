@@ -12,28 +12,28 @@ init();
 new URLMutationObserver(init).observe();
 
 function init() {
-	disableTimeCounter();
-	videoObserver?.unobserve();
+    disableTimeCounter();
+    videoObserver?.unobserve();
 
-	const videoService = new VideoServiceImpl();
-	const $video = videoService.getVideoHTMLElement();
-	if (!$video) return;
+    const videoService = new VideoServiceImpl();
+    const $video = videoService.getVideoHTMLElement();
+    if (!$video) return;
 
-	const videoId = videoService.getVideoId();
+    const videoId = videoService.getVideoId();
 
-	if (!videoId) return;
+    if (!videoId) return;
 
-	videoObserver = new VideoObserverImpl($video, {
-		onVideoPlay: () => enableTimeCounter(videoId),
-		onVideoPause: () => disableTimeCounter(),
-	});
-	videoObserver.observe();
+    videoObserver = new VideoObserverImpl($video, {
+        onVideoPlay: () => enableTimeCounter(videoId),
+        onVideoPause: () => disableTimeCounter()
+    });
+    videoObserver.observe();
 }
 
 function enableTimeCounter(videoId: string) {
-	videoCounterService.enableCounter(videoId);
+    videoCounterService.enableCounter(videoId);
 }
 
 function disableTimeCounter() {
-	videoCounterService.disableCounter();
+    videoCounterService.disableCounter();
 }

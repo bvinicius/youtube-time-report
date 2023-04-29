@@ -1,45 +1,45 @@
 import {
-	StatisticsState,
-	StatisticsRepository,
+    StatisticsState,
+    StatisticsRepository
 } from '../repositories/StatisticsReppository';
 import { StorageSystem } from '../repositories/StorageSystem';
 
 const STATISTICS_KEY = 'statistics';
 
 export default class StatisticsRepositoryInstance
-	implements StatisticsRepository
+    implements StatisticsRepository
 {
-	constructor(private storage: StorageSystem) {}
+    constructor(private storage: StorageSystem) {}
 
-	private state?: StatisticsState;
+    private state?: StatisticsState;
 
-	getState(): Promise<StatisticsState> {
-		if (this.state) {
-			return Promise.resolve(this.state);
-		}
-		return new Promise((resolve) => {
-			this.storage.get<StatisticsState>(STATISTICS_KEY).then((result) => {
-				this.state = result || {};
-				resolve(this.state || {});
-			});
-		});
-	}
+    getState(): Promise<StatisticsState> {
+        if (this.state) {
+            return Promise.resolve(this.state);
+        }
+        return new Promise((resolve) => {
+            this.storage.get<StatisticsState>(STATISTICS_KEY).then((result) => {
+                this.state = result || {};
+                resolve(this.state || {});
+            });
+        });
+    }
 
-	setState(state: StatisticsState) {
-		Object.keys(state).forEach((date) => {
-			const videoTimes = state[date];
-			Object.keys(videoTimes).forEach((videoId) => {
-				const time = videoTimes[videoId];
-				if (!this.state) this.state = {};
-				if (!this.state[date]) this.state[date] = {};
+    setState(state: StatisticsState) {
+        Object.keys(state).forEach((date) => {
+            const videoTimes = state[date];
+            Object.keys(videoTimes).forEach((videoId) => {
+                const time = videoTimes[videoId];
+                if (!this.state) this.state = {};
+                if (!this.state[date]) this.state[date] = {};
 
-				this.state[date][videoId] =
-					videoId in this.state[date]
-						? this.state[date][videoId] + time
-						: time;
-			});
-		});
+                this.state[date][videoId] =
+                    videoId in this.state[date]
+                        ? this.state[date][videoId] + time
+                        : time;
+            });
+        });
 
-		this.storage.set(STATISTICS_KEY, this.state);
-	}
+        this.storage.set(STATISTICS_KEY, this.state);
+    }
 }

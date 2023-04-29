@@ -1,4 +1,4 @@
 export interface VideoCounterService {
-	enableCounter(videoId: string): void;
-	disableCounter(): void;
+    enableCounter(videoId: string): void;
+    disableCounter(): void;
 }
