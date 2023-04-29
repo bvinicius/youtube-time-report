@@ -2,12 +2,14 @@ import {
 	WatchingDataAveragePeriodicity,
 	WatchingDataMessageDto,
 } from '../dto/WatchingDataMessageDto';
+import { YTRLogger } from '../logger/YTRLogger';
 import { StatisticsService } from '../services/StatisticsService';
 
 export class WatchingDataController {
 	constructor(
 		private receiver: typeof chrome.runtime,
-		private statisticStorage: StatisticsService
+		private statisticStorage: StatisticsService,
+		private logger: YTRLogger
 	) {}
 
 	listen() {
@@ -33,7 +35,7 @@ export class WatchingDataController {
 	}
 
 	private getWatchingData(days: number) {
-		console.log('getWatchingData', days);
+		this.logger.log('getWatchingData', days);
 
 		return this.statisticStorage.getTimeWatched({ days });
 	}
@@ -42,7 +44,7 @@ export class WatchingDataController {
 		periodicity: WatchingDataAveragePeriodicity,
 		count: number
 	) {
-		console.log('get average', count);
+		this.logger.log('get average', count);
 		return this.statisticStorage.getAverageWatchingData(periodicity, count);
 	}
 }
