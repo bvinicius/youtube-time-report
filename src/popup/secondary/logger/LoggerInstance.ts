@@ -6,8 +6,8 @@ export class LoggerInstance implements YTRLogger {
     warn = this.checkEnvironmentBeforeAction(console.warn);
     info = this.checkEnvironmentBeforeAction(console.info);
 
-    private checkEnvironmentBeforeAction(fn: (...args: any[]) => void) {
+    private checkEnvironmentBeforeAction(fn: (...args: unknown[]) => void) {
         const isProduction = import.meta.env.PROD;
-        return isProduction ? () => {} : fn.bind(console);
+        return isProduction ? () => undefined : fn.bind(console);
     }
 }

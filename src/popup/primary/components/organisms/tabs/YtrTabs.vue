@@ -2,8 +2,9 @@
     <div class="flex-col">
         <div class="flex justify-center select-none">
             <div
-                class="flex items-center"
                 v-for="(tab, index) in tabs"
+                class="flex items-center"
+                :key="tab.value"
             >
                 <div
                     class="text-body cursor-pointer py-2 px-6"
